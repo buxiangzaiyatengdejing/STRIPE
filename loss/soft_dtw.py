@@ -36,6 +36,7 @@ def compute_softdtw(D, gamma):
       rmax = max(max(r0, r1), r2)
       rsum = np.exp(r0 - rmax) + np.exp(r1 - rmax) + np.exp(r2 - rmax)
       softmin = - gamma * (np.log(rsum) + rmax)
+      # 有些不理解，因为从公式上来看，可以直接推出，-gamma * log (simga_i=1_N(exp(-a/gamma)) 实际上与 - gamma * log(exp(r0)+exp(r1）+exp(r2))的结果是一样的，是为了计算微分吗？
       R[i, j] = D[i - 1, j - 1] + softmin
   return R
 
