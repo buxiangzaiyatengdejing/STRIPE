@@ -204,7 +204,7 @@ def train_STRIPE(cvae, stripe, trainloader, testloader, device, mode_stripe, nsa
             output_phi, h = cvae.encoder.rnn_phi(inputs) # h: last latent state
             #h_penultimate = output_phi[:,-2,:] # for the decoder
             ###### STRIPE PROPOSAL: h -> z
-            sampled_z = stripe(h) # sampled_z : [batch_size, latent_dim * nsamples]
+            sampled_z = stripe(h) # sampled_z : [batch_size, half_latent_dim * nsamples]
 
             ###### DECODING:  concatenate z with zfixed and decode
             z_fixed = torch.randn((batch_size, stripe.half_latent_dim*nsamples), dtype=torch.float32).to(device)
