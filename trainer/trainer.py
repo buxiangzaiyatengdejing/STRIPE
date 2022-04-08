@@ -212,7 +212,7 @@ def train_STRIPE(cvae, stripe, trainloader, testloader, device, mode_stripe, nsa
             for k in range(0,nsamples):                    
                 z = sampled_z[:,stripe.half_latent_dim*k:stripe.half_latent_dim*(k+1)] # [batch_size, half_latent_dim]
                 z_f =  z_fixed[:,stripe.half_latent_dim*k:stripe.half_latent_dim*(k+1)]
-                if (mode_stripe=='shape'):
+                if (mode_stripe=='shape'):  # 这里的z,z_f与论文中对应的是采样时的部分，在计算shape部分的采样时，time部分是被固定住的，只是为什么是用torch.randn呢?
                     z = torch.cat( (z, z_f), dim=1)
                 else: # mode = time
                     z = torch.cat( (z_f, z), dim=1)   
